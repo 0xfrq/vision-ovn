@@ -10822,8 +10822,8 @@
 	<rt_info>
 		<Runtime_version value="2025.4.1-20426-82bbf0292c5-releases/2025/4" />
 		<conversion_parameters>
+			<input_model value="DIR/best.onnx" />
 			<is_python_object value="False" />
-			<output_model value="openvino/yolo_416/best.xml" />
 		</conversion_parameters>
 		<framework>
 			<names value="{0: 'bola'}" />
