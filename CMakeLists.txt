@@ -43,5 +43,6 @@ target_link_libraries(vision_ovn
     ${catkin_LIBRARIES}
     ${OpenCV_LIBS}
     inference_engine
+    inference_engine_legacy
     pthread
 )
