@@ -231,7 +231,7 @@ int main(int argc, char** argv) {
     auto pub_coord = nh.advertise<v2_detection::BallCoordinate>("/DEWO/image_processing/deteksi_bola/coordinate", 10);
     auto pub_area = nh.advertise<v2_detection::Ballarea>("/DEWO/image_processing/deteksi_bola/ball_area", 10);
 
-    std::string pkg = ros::package::getPath("vision_cpp");
+    std::string pkg = ros::package::getPath("vision_ovn");
     YoloOpenVINO yolo(pkg + "/model/best-416.xml", "CPU");
 
     ROS_INFO("memulai kamera...");

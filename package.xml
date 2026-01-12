@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>vision_cpp</name>
+  <name>vision_ovn</name>
   <version>0.0.1</version>
-  <description>yolo cpp ros node</description>
+  <description>yolo openvino ros node</description>
 
   <maintainer email="robotis@robotis.com">robotis</maintainer>
   <license>MIT</license>
