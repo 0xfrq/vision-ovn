@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 project(vision_ovn)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -march=native -DNDEBUG")
 
@@ -15,8 +15,10 @@ find_package(catkin REQUIRED COMPONENTS
 
 find_package(OpenCV REQUIRED)
 
-# Find OpenVINO 2021.4 (InferenceEngine)
-find_package(InferenceEngine REQUIRED)
+# OpenVINO 2020.4 paths
+set(OPENVINO_DIR /opt/intel/l_openvino_toolkit_runtime_ubuntu16_p_2020.4.287)
+set(IE_INCLUDE_DIR ${OPENVINO_DIR}/inference_engine/include)
+set(IE_LIB_DIR ${OPENVINO_DIR}/inference_engine/lib/intel64)
 
 # Catkin package configuration
 catkin_package(
@@ -27,8 +29,10 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/src
     ${catkin_INCLUDE_DIRS}
     ${OpenCV_INCLUDE_DIRS}
-    ${InferenceEngine_INCLUDE_DIRS}
+    ${IE_INCLUDE_DIR}
 )
+
+link_directories(${IE_LIB_DIR})
 
 add_executable(vision
     src/main.cpp
@@ -38,5 +42,6 @@ add_executable(vision
 target_link_libraries(vision
     ${catkin_LIBRARIES}
     ${OpenCV_LIBS}
-    ${InferenceEngine_LIBRARIES}
+    inference_engine
+    pthread
 )

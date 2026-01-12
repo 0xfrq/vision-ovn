@@ -1,11 +1,12 @@
 #include "yolo_openvino.hpp"
+#include <ie_plugin_config.hpp>
 
 using namespace std;
 using namespace InferenceEngine;
 
 YoloOpenVINO::YoloOpenVINO(const string& model_path, const string& device)
 {
-    cout << "Loading OpenVINO 2021.4 model: " << model_path << endl;
+    cout << "Loading OpenVINO 2020.4 model: " << model_path << endl;
     
     // load network dari file IR (.xml + .bin)
     CNNNetwork network = core.ReadNetwork(model_path);
@@ -35,12 +36,12 @@ YoloOpenVINO::YoloOpenVINO(const string& model_path, const string& device)
         item.second->setPrecision(Precision::FP32);
     }
     
-    // konfigurasi performa untuk CPU
+    // konfigurasi performa untuk CPU - optimized for lowest latency
     map<string, string> config;
     if(device == "CPU") {
-        config[PluginConfigParams::KEY_CPU_THREADS_NUM] = "4";
-        config[PluginConfigParams::KEY_CPU_BIND_THREAD] = PluginConfigParams::YES;
-        config[PluginConfigParams::KEY_CPU_THROUGHPUT_STREAMS] = "1";
+        config[CONFIG_KEY(CPU_THREADS_NUM)] = "4";
+        config[CONFIG_KEY(CPU_BIND_THREAD)] = CONFIG_VALUE(YES);
+        config[CONFIG_KEY(CPU_THROUGHPUT_STREAMS)] = "1";
     }
     
     // load executable network
@@ -53,7 +54,7 @@ YoloOpenVINO::YoloOpenVINO(const string& model_path, const string& device)
     padded_buffer = cv::Mat::zeros(input_height, input_width, CV_8UC3);
     
     printModelInfo();
-    cout << "OpenVINO 2021.4 model loaded successfully on " << device << endl;
+    cout << "OpenVINO 2020.4 model loaded successfully on " << device << endl;
 }
 
 void YoloOpenVINO::printModelInfo() {

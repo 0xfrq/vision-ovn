@@ -1,7 +1,7 @@
 #ifndef YOLO_OPENVINO_HPP
 #define YOLO_OPENVINO_HPP
 
-#include <inference_engine.hpp>
+#include <ie_core.hpp>
 #include <opencv2/opencv.hpp>
 #include <vector>
 #include <string>
