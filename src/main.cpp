@@ -462,9 +462,13 @@ int main(int argc, char** argv) {
                   << "] [Status: " << detect_status 
                   << "] [Blobsize: " << blobsize << "]" << std::flush;
         
-        // gui dimatikan untuk performa lebih baik
-        // cv::imshow("VISION_CPP", img_result);
-        // cv::waitKey(1);
+        // tampilkan fps pada frame
+        char fps_text[50];
+        snprintf(fps_text, sizeof(fps_text), "FPS: %.1f | %s | Blob: %d", fps, detect_status.c_str(), blobsize);
+        cv::putText(img_result, fps_text, cv::Point(10, 20), cv::FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(0, 255, 0), 1);
+        
+        cv::imshow("VISION_OVN", img_result);
+        cv::waitKey(1);
         
         ros::spinOnce();
     }
