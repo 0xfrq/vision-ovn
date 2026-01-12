@@ -34,12 +34,12 @@ include_directories(
 
 link_directories(${IE_LIB_DIR})
 
-add_executable(vision
+add_executable(vision_ovn
     src/main.cpp
     src/yolo_openvino.cpp
 )
 
-target_link_libraries(vision
+target_link_libraries(vision_ovn
     ${catkin_LIBRARIES}
     ${OpenCV_LIBS}
     inference_engine
